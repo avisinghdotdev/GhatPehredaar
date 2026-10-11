@@ -16,8 +16,8 @@ import {
 
 const phases: readonly Phase[] = ["pre", "during", "after"];
 
-function pdfHref(year: number, page: number): string {
-  return `/api/pdf/${String(year)}#page=${String(page)}`;
+function pdfHref(year: number, page: number, printed: string): string {
+  return `/api/pdf/${String(year)}#page=${String(page)}&search=${encodeURIComponent(printed)}&phrase=true`;
 }
 
 function ReadingCell({
@@ -49,7 +49,7 @@ function ReadingCell({
     <td className={`px-2 py-1 ${tone}`}>
       <a
         className="underline decoration-dotted underline-offset-2 hover:decoration-solid"
-        href={pdfHref(year, reading.source_page)}
+        href={pdfHref(year, reading.source_page, reading.printed)}
         rel="noreferrer"
         target="_blank"
         title={`${s.page} ${String(reading.source_page)}`}

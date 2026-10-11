@@ -51,10 +51,6 @@ check:
 build-web:
     pnpm --dir web run build
 
-# Build the image in Azure Container Registry and deploy it to the Container App (no local Docker needed)
-deploy:
-    az containerapp up --subscription az-sub-ghatpehredaar-prod --name ca-ghatpehredaar-prod --resource-group rg-ghatpehredaar-prod --location centralindia --environment cae-ghatpehredaar-prod --source . --ingress external --target-port 8000
-
 # Build and run the container locally (needs Docker Desktop)
 up:
     docker compose up --build

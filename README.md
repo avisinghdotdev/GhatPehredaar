@@ -8,7 +8,8 @@ Bhopal Impact Lab 2026 · Track 2, Visarjan Ghat Watch · Claude Impact Lab × C
 - **Members:** Avi Singh
 - **Track:** 2, Visarjan Ghat Watch
 - **The one user:** the Bhopal Municipal Corporation officer who plans Durga visarjan at the ghats and decides where to send extra cleaning, aeration and water testing before 20 October.
-- **Live:** https://ghatpehredaar.avisingh.dev (Azure URL: https://ca-ghatpehredaar-prod.redisland-50f365ba.centralindia.azurecontainerapps.io)
+- **Live:** https://ca-ghatpehredaar-prod.redisland-50f365ba.centralindia.azurecontainerapps.io (custom domain https://ghatpehredaar.avisingh.dev once Azure finishes issuing its certificate)
+- **Deploy:** GitHub Actions (`.github/workflows/release.yml`) builds the image, pushes it to a shared Azure Container Registry and updates the Azure Container App on every push to `main`.
 
 ## What it does
 
@@ -39,7 +40,7 @@ With [just](https://github.com/casey/just): `just init`, `just build-web`, `just
 
 To regenerate the brief: copy `.env.example` to `.env`, set `ANTHROPIC_API_KEY`, run `just brief`. The repo ships a generated `data/brief.json` so the tool works without a key.
 
-Container: `docker compose up --build` serves everything on http://localhost:8000. Deploy to Azure Container Apps with `just deploy` (builds in Azure Container Registry, no local Docker needed).
+Container: `docker compose up --build` serves everything on http://localhost:8000. Deployment to Azure Container Apps runs from GitHub Actions on every push to `main`.
 
 ## What works and what does not
 
@@ -51,7 +52,7 @@ Works:
 Does not work yet:
 
 - **Ingesting a new MPPCB PDF.** The tool reads the organisers' CSV. A reader agent that turns the next report (Durga 2026, due in November) into checked rows with page references is the next step.
-- **Highlighting the exact cell inside the PDF.** Links open the right page; the cell is not highlighted.
+- **Highlighting the exact cell inside the PDF in every browser.** Links open the right page and pass the printed value as a search term; pdf.js-based viewers (Firefox) highlight it, Chrome's viewer only opens the page.
 - **Heavy metals against a limit.** CPCB Class B sets no metal limit, so metals are shown as context only.
 - **Statewide context.** The 21,600-row statewide file is not used yet; it has impossible values (dissolved oxygen up to 432 mg/l) and 879 unreadable site names that need the reader agent first.
 - **A map of the ghats.**
