@@ -8,7 +8,7 @@ Bhopal Impact Lab 2026 · Track 2, Visarjan Ghat Watch · Claude Impact Lab × C
 - **Members:** Avi Singh
 - **Track:** 2, Visarjan Ghat Watch
 - **The one user:** the Bhopal Municipal Corporation officer who plans Durga visarjan at the ghats and decides where to send extra cleaning, aeration and water testing before 20 October.
-- **Live:** https://ghatpehredaar.avisingh.dev
+- **Live:** https://ghatpehredaar.avisingh.dev (Azure URL: https://ca-ghatpehredaar-prod.redisland-50f365ba.centralindia.azurecontainerapps.io)
 
 ## What it does
 
