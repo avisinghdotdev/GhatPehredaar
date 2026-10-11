@@ -46,13 +46,12 @@ Container: `docker compose up --build` serves everything on http://localhost:800
 
 Works:
 
-- Ranking, three-axis verdicts, bilingual reasons, rank ranges, coverage grid, data notes, page links into the three MPPCB PDFs, bilingual brief with number validation, Hindi/English toggle.
+- Ranking, three-axis verdicts, bilingual reasons, rank ranges, coverage grid, data notes, page links into the three MPPCB PDFs with the value highlighted, bilingual brief with number validation, Hindi/English toggle.
 - API tests (`uv run pytest`) check the totals against the problem statement: 42 of 116 oxygen readings below 5 mg/l, 100 of 112 BOD readings above 3 mg/l.
 
 Does not work yet:
 
 - **Ingesting a new MPPCB PDF.** The tool reads the organisers' CSV. A reader agent that turns the next report (Durga 2026, due in November) into checked rows with page references is the next step.
-- **Highlighting the exact cell inside the PDF in every browser.** Links open the right page and pass the printed value as a search term; pdf.js-based viewers (Firefox) highlight it, Chrome's viewer only opens the page.
 - **Heavy metals against a limit.** CPCB Class B sets no metal limit, so metals are shown as context only.
 - **Statewide context.** The 21,600-row statewide file is not used yet; it has impossible values (dissolved oxygen up to 432 mg/l) and 879 unreadable site names that need the reader agent first.
 - **A map of the ghats.**
