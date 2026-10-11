@@ -16,8 +16,10 @@ import {
 
 const phases: readonly Phase[] = ["pre", "during", "after"];
 
+// The bundled pdf.js viewer opens the report at the page and highlights the printed value.
 function pdfHref(year: number, page: number, printed: string): string {
-  return `/api/pdf/${String(year)}#page=${String(page)}&search=${encodeURIComponent(printed)}&phrase=true`;
+  const file = encodeURIComponent(`/api/pdf/${String(year)}`);
+  return `/pdfjs/web/viewer.html?file=${file}#page=${String(page)}&search=${encodeURIComponent(printed)}&phrase=true`;
 }
 
 function ReadingCell({
