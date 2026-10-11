@@ -81,7 +81,7 @@ Each reading is compared with its Class B limit. A ghat's rank is the share of f
 
 ## Stack
 
-FastAPI + pandas (Python 3.13, uv) and React Router 8 + Vite + TypeScript + Tailwind (pnpm). One container serves both. Claude (`claude-sonnet-5-5`) writes the brief; the API key lives only in `.env`.
+FastAPI + pandas (Python 3.13, uv) and React Router 8 + Vite + TypeScript + Tailwind (pnpm). One container serves both. Claude (`claude-opus-5-5`) writes the brief; the API key lives only in `.env`.
 
 ## License
 
