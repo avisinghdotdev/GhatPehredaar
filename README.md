@@ -21,7 +21,7 @@ Every Ganesh and Durga festival, the MP Pollution Control Board samples the wate
    - *Clearly worse during immersion* (oxygen down or BOD up by 1 mg/l or more)? Cranes, liners, crowd control on the day.
    - *Still failing one week after?* Cleanup crews and re-test.
 3. **A plain-language reason for every rank**, in Hindi and English.
-4. **Every number linked to the MPPCB report page it was printed on.** Click a reading and the original PDF opens at that page.
+4. **Every number linked to the MPPCB report page it was printed on.** Click a reading and the original PDF opens in the bundled pdf.js viewer at that page with the value highlighted.
 5. **A rank range** from 1,000 resamples of the six festivals, so a shaky middle order is shown as shaky.
 6. **Gaps shown as gaps:** not-sampled cells, ghats with no Durga 2025 table, and the notes below.
 7. **A one-page brief to forward**, in Hindi and English, written by Claude from the computed evidence. A validator rejects any number in the brief that is not present in the data, so the brief can never carry an invented figure.
