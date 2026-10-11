@@ -55,15 +55,13 @@ const strings = {
     footer:
       "Public data only. No health claims. Missing data is shown as missing, never as clean.",
     skip: "Skip to main content",
-    govStrip: "Government of Madhya Pradesh · Bhopal Municipal Corporation",
-    prototype: "Hackathon prototype · not an official BMC website",
     forOfficer: "For the BMC officer in charge of visarjan",
     dataSources: "Data sources",
     report: (year: string) => `MPPCB idol-immersion report ${year} (PDF)`,
     cpcb: "CPCB water-quality criteria (classes A to E)",
     latestData: "Latest data: Durga visarjan 2025 report",
-    builtAt:
-      "Built at Bhopal Impact Lab 2026, Bhopal, 11 October 2026. Open source under the MIT license, offered to the Government of Madhya Pradesh through MPSeDC.",
+    license:
+      "Open source under the MIT license. Source code and data on GitHub: avisinghdotdev/GhatPehredaar.",
     chartTitle:
       "Share of oxygen, BOD and pH readings outside the limit, worst first",
     median: "median of all festivals",
@@ -122,15 +120,13 @@ const strings = {
     footer:
       "केवल सार्वजनिक डेटा। स्वास्थ्य पर कोई दावा नहीं। जो डेटा नहीं है, उसे 'नहीं है' दिखाया गया है, साफ़ नहीं।",
     skip: "मुख्य सामग्री पर जाएँ",
-    govStrip: "मध्यप्रदेश शासन · नगर पालिक निगम भोपाल",
-    prototype: "हैकाथॉन प्रोटोटाइप · नगर निगम की आधिकारिक वेबसाइट नहीं",
     forOfficer: "नगर निगम के विसर्जन-प्रभारी अधिकारी के लिए",
     dataSources: "डेटा स्रोत",
     report: (year: string) => `MPPCB मूर्ति-विसर्जन रिपोर्ट ${year} (PDF)`,
     cpcb: "CPCB जल-गुणवत्ता मानक (क्लास A से E)",
     latestData: "नवीनतम डेटा: दुर्गा विसर्जन 2025 रिपोर्ट",
-    builtAt:
-      "भोपाल इम्पैक्ट लैब 2026, भोपाल में 11 अक्टूबर 2026 को बनाया गया। MIT लाइसेंस के साथ ओपन सोर्स, MPSeDC के माध्यम से मध्यप्रदेश शासन को समर्पित।",
+    license:
+      "MIT लाइसेंस के साथ ओपन सोर्स। कोड और डेटा GitHub पर: avisinghdotdev/GhatPehredaar।",
     chartTitle:
       "ऑक्सीजन, BOD और pH की मानक से बाहर रीडिंग का हिस्सा, सबसे खराब पहले",
     median: "सभी त्योहारों की माध्यिका",

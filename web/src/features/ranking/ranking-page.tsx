@@ -177,22 +177,6 @@ function SiteHeader({
       >
         {s.skip}
       </a>
-      <div className="bg-river-900 text-sand-50 print:hidden">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-1.5 text-xs">
-          <span>{s.govStrip}</span>
-          <button
-            className="rounded border border-sand-300/60 px-2 py-0.5 font-semibold hover:bg-river-700"
-            onClick={onToggleLang}
-            type="button"
-          >
-            {s.switchTo}
-          </button>
-        </div>
-      </div>
-      <div
-        aria-hidden="true"
-        className="h-1 bg-[linear-gradient(90deg,#ff9933_0_33.3%,#ffffff_33.3%_66.6%,#138808_66.6%)]"
-      />
       <header className="border-b border-sand-300 bg-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-4 px-4 py-3">
           <img
@@ -217,9 +201,13 @@ function SiteHeader({
               {s.forOfficer} · {s.cityTag}
             </p>
           </div>
-          <span className="rounded-md border border-amber-300 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-900">
-            {s.prototype}
-          </span>
+          <button
+            className="rounded-md border border-river-700 px-3 py-1.5 text-sm font-semibold text-river-700 hover:bg-river-50 print:hidden"
+            onClick={onToggleLang}
+            type="button"
+          >
+            {s.switchTo}
+          </button>
         </div>
       </header>
     </>
@@ -259,7 +247,7 @@ function SiteFooter({ lang }: { lang: Lang }) {
           </ul>
           <p className="mt-2 text-sand-300">{s.latestData}</p>
         </div>
-        <p className="leading-relaxed">{s.builtAt}</p>
+        <p className="leading-relaxed">{s.license}</p>
         <p className="leading-relaxed">
           {s.footer}
           <span className="mt-2 block text-sand-300">v{__APP_VERSION__}</span>
