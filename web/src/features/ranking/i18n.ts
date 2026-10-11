@@ -50,7 +50,6 @@ const strings = {
     briefMissing: "Brief not generated yet. Run `just brief` with an API key.",
     copy: "Copy",
     copied: "Copied",
-    generated: "Written by",
     print: "Print / PDF",
     footer:
       "Public data only. No health claims. Missing data is shown as missing, never as clean.",
@@ -60,8 +59,7 @@ const strings = {
     report: (year: string) => `MPPCB idol-immersion report ${year} (PDF)`,
     cpcb: "CPCB water-quality criteria (classes A to E)",
     latestData: "Latest data: Durga visarjan 2025 report",
-    license:
-      "Open source under the MIT license. Source code and data on GitHub: avisinghdotdev/GhatPehredaar.",
+    license: "Open source under the MIT license.",
     chartTitle:
       "Share of oxygen, BOD and pH readings outside the limit, worst first",
     median: "median of all festivals",
@@ -115,7 +113,6 @@ const strings = {
     briefMissing: "नोट अभी नहीं बना है। API key के साथ `just brief` चलाएँ।",
     copy: "कॉपी करें",
     copied: "कॉपी हो गया",
-    generated: "लेखक",
     print: "प्रिंट / PDF",
     footer:
       "केवल सार्वजनिक डेटा। स्वास्थ्य पर कोई दावा नहीं। जो डेटा नहीं है, उसे 'नहीं है' दिखाया गया है, साफ़ नहीं।",
@@ -125,8 +122,7 @@ const strings = {
     report: (year: string) => `MPPCB मूर्ति-विसर्जन रिपोर्ट ${year} (PDF)`,
     cpcb: "CPCB जल-गुणवत्ता मानक (क्लास A से E)",
     latestData: "नवीनतम डेटा: दुर्गा विसर्जन 2025 रिपोर्ट",
-    license:
-      "MIT लाइसेंस के साथ ओपन सोर्स। कोड और डेटा GitHub पर: avisinghdotdev/GhatPehredaar।",
+    license: "MIT लाइसेंस के साथ ओपन सोर्स।",
     chartTitle:
       "ऑक्सीजन, BOD और pH की मानक से बाहर रीडिंग का हिस्सा, सबसे खराब पहले",
     median: "सभी त्योहारों की माध्यिका",

@@ -54,9 +54,6 @@ export function BriefPanel({ lang }: { lang: Lang }) {
       <pre className="font-sans whitespace-pre-wrap text-sm leading-relaxed">
         {text}
       </pre>
-      <p className="mt-2 text-xs text-neutral-600">
-        {s.generated} {brief.data.model} · {brief.data.generated_at}
-      </p>
     </section>
   );
 }
