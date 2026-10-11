@@ -15,7 +15,7 @@ import anthropic
 from ghat_pehredaar_api.data import BRIEF_JSON, load_readings
 from ghat_pehredaar_api.scoring import GhatRanking, Ranking, rank_ghats
 
-MODEL = "claude-opus-5-5"
+MODEL = "claude-sonnet-5-5"
 VISARJAN_DATE = "20 October 2026"
 # Numbers the brief may use that are not readings: the date, the limits, the material-change step.
 CONTEXT_NUMBERS = {20, 2026, 5, 3, 6.5, 8.5, 1, 7, 2023, 2025, 189, 17, 11}
