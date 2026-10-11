@@ -186,7 +186,7 @@ function SiteHeader({
           />
           <img
             alt="Bhopal Municipal Corporation"
-            className="h-16 w-auto"
+            className="h-20 w-auto"
             src="/logos/bmc.png"
           />
           <div className="min-w-0 flex-1">
