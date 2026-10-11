@@ -1,0 +1,15 @@
+[project]
+name = "ghat-pehredaar-api"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=0.60",
+    "fastapi>=0.141.1",
+    "pandas>=2.3",
+    "pydantic>=2.13.4",
+    "uvicorn>=0.54.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.19,<0.13.0"]
+build-backend = "uv_build"

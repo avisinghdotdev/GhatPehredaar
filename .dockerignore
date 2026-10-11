@@ -1,0 +1,13 @@
+.git
+.venv
+.env*
+.claude
+.docs
+.vscode
+web/node_modules
+web/dist
+web/.react-router
+**/__pycache__
+.ruff_cache
+.pytest_cache
+plan.md

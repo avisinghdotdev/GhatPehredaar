@@ -1,0 +1,65 @@
+# Release: build the image on the runner, push it to the shared registry, deploy the Container App.
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  AZURE_CLIENT_ID: 1ef456e9-d174-40f9-aa4e-3c640811c85f
+  AZURE_TENANT_ID: 89906370-4617-4be4-a465-3b5425b8b8cf
+  AZURE_SUBSCRIPTION_ID: 789989fe-53e2-422c-ae46-c8759d9d0def
+  REGISTRY_SUBSCRIPTION_ID: cc24a8b0-cb74-4ebb-8532-75e6064a349a
+  REGISTRY: cravisingh.azurecr.io
+  IMAGE: cravisingh.azurecr.io/ghatpehredaar/app
+  RESOURCE_GROUP: rg-ghatpehredaar-prod
+  APP: ca-ghatpehredaar-prod
+  ENVIRONMENT: cae-ghatpehredaar-prod
+  APP_IDENTITY: /subscriptions/789989fe-53e2-422c-ae46-c8759d9d0def/resourcegroups/rg-ghatpehredaar-prod/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-ghatpehredaar-app-prod
+
+jobs:
+  release:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: azure/login@v3
+        with:
+          client-id: ${{ env.AZURE_CLIENT_ID }}
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+      - run: az acr login --name cravisingh --subscription "$REGISTRY_SUBSCRIPTION_ID"
+      - uses: docker/setup-buildx-action@v4
+      - name: Build and push
+        run: |
+          docker buildx build --platform linux/amd64 --push \
+            --tag "$IMAGE:$GITHUB_SHA" --tag "$IMAGE:latest" .
+      - name: Deploy
+        run: |
+          if az containerapp show --name "$APP" --resource-group "$RESOURCE_GROUP" --query name --output tsv >/dev/null 2>&1; then
+            az containerapp update --name "$APP" --resource-group "$RESOURCE_GROUP" \
+              --image "$IMAGE:$GITHUB_SHA" --output none
+          else
+            az containerapp create --name "$APP" --resource-group "$RESOURCE_GROUP" \
+              --environment "$ENVIRONMENT" --image "$IMAGE:$GITHUB_SHA" \
+              --registry-server "$REGISTRY" --registry-identity "$APP_IDENTITY" \
+              --user-assigned "$APP_IDENTITY" \
+              --ingress external --target-port 8000 \
+              --min-replicas 0 --max-replicas 2 --cpu 0.25 --memory 0.5Gi --output none
+          fi
+      - name: Health check
+        run: |
+          fqdn=$(az containerapp show --name "$APP" --resource-group "$RESOURCE_GROUP" \
+            --query properties.configuration.ingress.fqdn --output tsv)
+          echo "https://$fqdn"
+          body=$(curl --fail --silent --show-error --retry 10 --retry-all-errors --retry-delay 10 "https://$fqdn/api/health")
+          echo "$body"
+          grep --quiet '"status":"ok"' <<< "$body"

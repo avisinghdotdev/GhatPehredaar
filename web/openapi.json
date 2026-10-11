@@ -1,0 +1,663 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Ghat Pehredaar API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ranking": {
+      "get": {
+        "summary": "Get Ranking",
+        "operationId": "ranking",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ranking"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brief": {
+      "get": {
+        "summary": "Get Brief",
+        "operationId": "brief",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Brief"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pdf/{year}": {
+      "get": {
+        "summary": "Get Report Pdf",
+        "operationId": "reportPdf",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Axis": {
+        "properties": {
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "fail",
+              "warn",
+              "pass",
+              "unknown"
+            ],
+            "title": "Verdict"
+          },
+          "failing": {
+            "type": "integer",
+            "title": "Failing"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "median_do_change": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Median Do Change"
+          },
+          "median_bod_change": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Median Bod Change"
+          }
+        },
+        "type": "object",
+        "required": [
+          "verdict",
+          "failing",
+          "total"
+        ],
+        "title": "Axis"
+      },
+      "Brief": {
+        "properties": {
+          "generated_at": {
+            "type": "string",
+            "title": "Generated At"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "en": {
+            "type": "string",
+            "title": "En"
+          },
+          "hi": {
+            "type": "string",
+            "title": "Hi"
+          }
+        },
+        "type": "object",
+        "required": [
+          "generated_at",
+          "model",
+          "en",
+          "hi"
+        ],
+        "title": "Brief",
+        "description": "Bilingual officer brief written by `python -m ghat_pehredaar_api.brief`."
+      },
+      "Coverage": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "festival": {
+            "type": "string",
+            "title": "Festival"
+          },
+          "pre": {
+            "type": "boolean",
+            "title": "Pre"
+          },
+          "during": {
+            "type": "boolean",
+            "title": "During"
+          },
+          "after": {
+            "type": "boolean",
+            "title": "After"
+          }
+        },
+        "type": "object",
+        "required": [
+          "year",
+          "festival",
+          "pre",
+          "during",
+          "after"
+        ],
+        "title": "Coverage"
+      },
+      "EventReadings": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "festival": {
+            "type": "string",
+            "title": "Festival"
+          },
+          "pre": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Reading"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "during": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Reading"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "after": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Reading"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "year",
+          "festival",
+          "pre",
+          "during",
+          "after"
+        ],
+        "title": "EventReadings"
+      },
+      "GhatRanking": {
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "rank_low": {
+            "type": "integer",
+            "title": "Rank Low"
+          },
+          "rank_high": {
+            "type": "integer",
+            "title": "Rank High"
+          },
+          "site": {
+            "type": "string",
+            "title": "Site"
+          },
+          "water_body": {
+            "type": "string",
+            "title": "Water Body"
+          },
+          "site_confidence": {
+            "type": "string",
+            "title": "Site Confidence"
+          },
+          "readings": {
+            "type": "integer",
+            "title": "Readings"
+          },
+          "failing": {
+            "type": "integer",
+            "title": "Failing"
+          },
+          "fail_share": {
+            "type": "number",
+            "title": "Fail Share"
+          },
+          "chronic": {
+            "$ref": "#/components/schemas/Axis"
+          },
+          "shock": {
+            "$ref": "#/components/schemas/Axis"
+          },
+          "recovery": {
+            "$ref": "#/components/schemas/Axis"
+          },
+          "parameters": {
+            "items": {
+              "$ref": "#/components/schemas/ParameterEvidence"
+            },
+            "type": "array",
+            "title": "Parameters"
+          },
+          "coverage": {
+            "items": {
+              "$ref": "#/components/schemas/Coverage"
+            },
+            "type": "array",
+            "title": "Coverage"
+          },
+          "reason_en": {
+            "type": "string",
+            "title": "Reason En"
+          },
+          "reason_hi": {
+            "type": "string",
+            "title": "Reason Hi"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rank",
+          "rank_low",
+          "rank_high",
+          "site",
+          "water_body",
+          "site_confidence",
+          "readings",
+          "failing",
+          "fail_share",
+          "chronic",
+          "shock",
+          "recovery",
+          "parameters",
+          "coverage",
+          "reason_en",
+          "reason_hi"
+        ],
+        "title": "GhatRanking"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Health": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "version"
+        ],
+        "title": "Health"
+      },
+      "Limit": {
+        "properties": {
+          "parameter": {
+            "type": "string",
+            "title": "Parameter"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "min",
+              "max",
+              "range"
+            ],
+            "title": "Kind"
+          },
+          "low": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Low"
+          },
+          "high": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "High"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          }
+        },
+        "type": "object",
+        "required": [
+          "parameter",
+          "kind",
+          "unit"
+        ],
+        "title": "Limit",
+        "description": "One CPCB Class B (outdoor bathing) limit, from cpcb.gov.in/water-quality-criteria."
+      },
+      "Note": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "en": {
+            "type": "string",
+            "title": "En"
+          },
+          "hi": {
+            "type": "string",
+            "title": "Hi"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "en",
+          "hi"
+        ],
+        "title": "Note"
+      },
+      "ParameterEvidence": {
+        "properties": {
+          "parameter": {
+            "type": "string",
+            "title": "Parameter"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "limit": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Limit"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "readings": {
+            "type": "integer",
+            "title": "Readings"
+          },
+          "failing": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failing"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/EventReadings"
+            },
+            "type": "array",
+            "title": "Events"
+          }
+        },
+        "type": "object",
+        "required": [
+          "parameter",
+          "unit",
+          "limit",
+          "readings",
+          "failing",
+          "events"
+        ],
+        "title": "ParameterEvidence"
+      },
+      "Ranking": {
+        "properties": {
+          "rows": {
+            "type": "integer",
+            "title": "Rows"
+          },
+          "years": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Years"
+          },
+          "limits": {
+            "items": {
+              "$ref": "#/components/schemas/Limit"
+            },
+            "type": "array",
+            "title": "Limits"
+          },
+          "ghats": {
+            "items": {
+              "$ref": "#/components/schemas/GhatRanking"
+            },
+            "type": "array",
+            "title": "Ghats"
+          },
+          "notes": {
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            },
+            "type": "array",
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rows",
+          "years",
+          "limits",
+          "ghats",
+          "notes"
+        ],
+        "title": "Ranking"
+      },
+      "Reading": {
+        "properties": {
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "printed": {
+            "type": "string",
+            "title": "Printed"
+          },
+          "flag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Flag"
+          },
+          "fails": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fails"
+          },
+          "detection_limit_as_value": {
+            "type": "boolean",
+            "title": "Detection Limit As Value"
+          },
+          "source_page": {
+            "type": "integer",
+            "title": "Source Page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "printed",
+          "flag",
+          "fails",
+          "detection_limit_as_value",
+          "source_page"
+        ],
+        "title": "Reading"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

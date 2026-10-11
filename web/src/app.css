@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --color-river-50: #f0f7f6;
+  --color-river-100: #d9ecea;
+  --color-river-700: #1f5f5b;
+  --color-river-900: #10332f;
+  --color-sand-50: #fbf8f1;
+  --color-sand-100: #f3ecd9;
+  --color-sand-300: #d9c9a0;
+}
+
+body {
+  background-color: var(--color-sand-50);
+  color: var(--color-river-900);
+}
